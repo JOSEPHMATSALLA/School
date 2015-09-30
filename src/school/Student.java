@@ -1,8 +1,10 @@
 package school;
 public class Student extends Person{
     private int gradeLevel;
+    //private double grade;
     private Course courses[] = new Course[Course.numPeriods];
-     
+    private double grade[] = new double[Course.numPeriods];
+    private int numClassesIn;
     public static Student addStudent(String _name,
     Gender _gender, int _weight, int _gradeLevel)
     {
@@ -17,19 +19,21 @@ public class Student extends Person{
         gradeLevel = _gradeLevel;
     } 
     
-    public boolean addCourse(Course _course)
+    public boolean addCourse(Course _course, double _grade)
     {
         if (!setCourseOK(_course))
             return(false);
         if (!_course.setStudentOK(this))
             return(false);
         _course.setStudentDoIt(this);
-        setCourseDoIt(_course);
+        setCourseDoIt(_course,_grade);
         return(true);
     } 
-    public void setCourseDoIt(Course _course)
+    public void setCourseDoIt(Course _course, double _grade)
     {
         courses[_course.getPeriod()] = _course;
+        grade[_course.getPeriod()]=_grade;
+        numClassesIn++;
     }
     public boolean setCourseOK(Course _course)
     {
@@ -39,8 +43,23 @@ public class Student extends Person{
             return(false);
         return(true);
     }
-            
-            
+    public double getGPA()
+    {
+        double gpa=0;
+        double totalGrades=0;
+        for(int index=0;index<Course.numPeriods;index++)
+        {
+            totalGrades+=grade[index];
+        }
+        if(numClassesIn!=0)
+        gpa=totalGrades/numClassesIn;
+        return(gpa);
+    }
+        public void printGPA()
+    {
+       System.out.println(getName() + " Gpa is"+getGPA());
+        
+    }    
             
     public void setGradeLevel(int _gradeLevel)
     {
@@ -65,5 +84,18 @@ public class Student extends Person{
     public String toString()
     {
         return(getName());
-    }       
+    }  
+    public void printTeachersNames()
+    {
+       System.out.println(getName() + " has theese teachers");
+        for (Course temp : courses)
+        {
+            if (temp != null)
+            {
+                if(temp.getTeacher() !=null)
+                    System.out.println(temp.getTeacher().getName());
+                
+            }
+        }
+    }
 }

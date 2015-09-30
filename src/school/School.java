@@ -17,19 +17,21 @@ public class School {
         Course geom =  Course.addCourse("Geometry", Course.Type.Math, 1);
         Course photo =  Course.addCourse("Photography", Course.Type.Elective, 3);       
         Course biology =  Course.addCourse("Biology", Course.Type.Science, 2);       
-        Course worldHistory =  Course.addCourse("WorldHistory", Course.Type.History, 2);       
+        Course worldHistory =  Course.addCourse("WorldHistory", Course.Type.History, 2);   
+        geom.addStudent(ann,3);
 
-        geom.addStudent(bobby);
-        photo.addStudent(jill);
-        biology.addStudent(ann);
-        worldHistory.addStudent(sean);
-        worldHistory.addStudent(ann);
-        worldHistory.addStudent(joe);
-         
+        geom.addStudent(bobby,3.0);
+        photo.addStudent(jill,4.7);
+        biology.addStudent(ann,2.2);
+        worldHistory.addStudent(sean,3.3);
+        worldHistory.addStudent(ann,1.1);
+        //worldHistory.addStudent(joe);
+         joe.addCourse(worldHistory,3.6);
         geom.addTeacher(price);
         photo.addTeacher(anderson);
         biology.addTeacher(smith);
         worldHistory.addTeacher(hudson);
+        System.out.println(ann.getGPA());
         
         
         
@@ -39,5 +41,6 @@ public class School {
         Teacher.printNames();
         
         hudson.printStudentsNames();
+        bobby.printTeachersNames();
     }
 }
