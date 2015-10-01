@@ -64,7 +64,38 @@ public class Teacher extends Person{
         }
     }   
     
-    
+    public static Teacher getMostElectives()
+    {
+        Teacher teacher=null;
+        int currentHighNumElective=0;
+        for (Person temp : people)
+        {
+            
+            if (temp instanceof Teacher)
+            {
+                int numElective=0;
+                for(Course course:((Teacher)temp).courses)
+                {
+                    if(course!=null)
+                    {
+                    if(course.getType()==Course.Type.Elective)
+                    {
+                        numElective++;
+                    }
+                    }
+                }
+                if(numElective>=currentHighNumElective)
+                {
+                currentHighNumElective=numElective;    
+                teacher=((Teacher)temp);
+                }
+                
+                
+            }
+            
+        }
+        return(teacher);
+    }
     public void printStudentsNames()
     {
        System.out.println(getName() + " teaches");
@@ -78,5 +109,23 @@ public class Teacher extends Person{
                 }
             }
         }
+    }
+    public void printStudentsNamesInGrade(int grade)
+    {
+       System.out.println(getName() + " is in grade" +grade);
+       for (Course temp : courses)
+        {
+            if (temp != null)
+            {
+                for (int index = 0;index < temp.getNumStudents();index++)
+                {
+                    if(temp.getStudent(index).getGradeLevel()==grade)
+                    {
+                        System.out.println(temp.getStudent(index).getName());
+                    }
+                }
+            }
+        }
+       
     }
 }

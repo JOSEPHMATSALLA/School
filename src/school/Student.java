@@ -49,6 +49,7 @@ public class Student extends Person{
         double totalGrades=0;
         for(int index=0;index<Course.numPeriods;index++)
         {
+            if(courses[index]!=null)
             totalGrades+=grade[index];
         }
         if(numClassesIn!=0)
@@ -68,8 +69,39 @@ public class Student extends Person{
     public int getGradeLevel()
     {
         return(gradeLevel);
-    }          
-    
+    }   
+    public static Student getHighestGPA()
+    {
+        //double bestgpa=0;
+        Student student=null;
+        for (Person temp : people)
+        {
+            
+            if (temp instanceof Student)
+            {
+                
+                if(student==null||((Student)temp).getGPA()>student.getGPA())
+                  student= ((Student)temp); 
+                
+                //System.out.println(temp.getName());
+            }
+            
+        }
+        return(student);
+    }
+    public static void printNamesGPAGreaterThan(double _gpa)
+    {
+        System.out.println(
+        "===printNamesOfGPA=== ");
+        for (Person temp : people)
+        {
+            if (temp instanceof Student)
+            {
+                if(((Student)temp).getGPA()>_gpa)
+                System.out.println(temp.getName());
+            }
+        }
+    }
     public static void printNames()
     {
         System.out.println(

@@ -29,6 +29,7 @@ public class School {
          joe.addCourse(worldHistory,3.6);
         geom.addTeacher(price);
         photo.addTeacher(anderson);
+        photo.addTeacher(smith);
         biology.addTeacher(smith);
         worldHistory.addTeacher(hudson);
         System.out.println(ann.getGPA());
@@ -42,5 +43,13 @@ public class School {
         
         hudson.printStudentsNames();
         bobby.printTeachersNames();
+        
+        Student.printNamesGPAGreaterThan(2.0);
+        Student highGpa =Student.getHighestGPA();
+        System.out.println("Higest gpa is-"+highGpa.getName());
+        
+        Teacher mostElectives= Teacher.getMostElectives();
+        System.out.println("Most electives-"+mostElectives.getName());
+        anderson.printStudentsNamesInGrade(11);
     }
 }
