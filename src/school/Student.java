@@ -125,9 +125,52 @@ public class Student extends Person{
             if (temp != null)
             {
                 if(temp.getTeacher() !=null)
-                    System.out.println(temp.getTeacher().getName());
+                {
+                    for(int i=0;i<temp.getNumStudents();i++ )
+                    {
+                        System.out.println(temp.getStudent(i).getName());
+                    }
+                }
                 
             }
         }
+    }
+    public static void printNamesInHonors()
+    {
+       System.out.println("Theese people are in honors");
+        for (Person temp : people)
+        {
+            if (temp instanceof Student)
+            {
+                boolean isHonors=false;
+                
+                    for(Course course:((Student)temp).courses)
+                    {
+                        if(course!=null&&course.getHonors())
+                        isHonors=true;
+                    }
+                if(isHonors)
+                    System.out.println(temp.getName());
+            }
+        } 
+    }
+    public Teacher leastMean()
+    {
+        
+        Teacher nice=null;
+        System.out.println("====These are the least mean teachers====");
+        for (Course temp : courses)
+        {
+            if (temp != null)
+            {
+                if(temp.getTeacher()!=null)
+                {
+                    if(nice==null||nice.getMeanLevel()>temp.getTeacher().getMeanLevel())
+                    nice=temp.getTeacher();
+                }
+                
+            }
+        }
+        return(nice);
     }
 }

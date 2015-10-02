@@ -5,6 +5,7 @@
 package school; 
 public class Teacher extends Person{
     private double meanLevel;
+    private static int numStudents;
     private Course courses[] = new Course[Course.numPeriods];
     
     public static Teacher addTeacher(String _name,
@@ -21,7 +22,7 @@ public class Teacher extends Person{
         super(_name,_gender,_weight);
         meanLevel = _meanLevel;
     }
-
+    
     public boolean addCourse(Course _course)
     {
         if (!setCourseOK(_course))
@@ -112,7 +113,7 @@ public class Teacher extends Person{
     }
     public void printStudentsNamesInGrade(int grade)
     {
-       System.out.println(getName() + " is in grade" +grade);
+       System.out.println("Students in grade " +grade+":");
        for (Course temp : courses)
         {
             if (temp != null)
@@ -123,6 +124,39 @@ public class Teacher extends Person{
                     {
                         System.out.println(temp.getStudent(index).getName());
                     }
+                }
+            }
+        }
+       
+    }
+    public static void printTeachersNamesThatTeach(int grade)
+    {
+       System.out.println("Teachers that teach grade " +grade+":");
+       for(Person temp:people)
+        {
+            if (temp != null)
+            {
+                if(temp instanceof Teacher)
+                {
+                    boolean printed=false;
+
+                    for (int index = 0;index < ((Teacher)temp).courses.length;index++)
+                    {
+                        Course course = ((Teacher)temp).courses[index];
+                        if(course!=null)
+                        {
+                            for(int i = 0;i < course.getNumStudents();i++)
+                            {
+                                if(course.getStudent(i).getGradeLevel()==grade)
+                                {
+                                  printed=true;  
+                                }
+                            }
+                            
+                        }
+                    }
+                    if(printed)
+                       System.out.println(temp.getName());                    
                 }
             }
         }

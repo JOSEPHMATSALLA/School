@@ -14,10 +14,10 @@ public class School {
         Teacher smith = Teacher.addTeacher("Smith", Person.Gender.Male, 152,8.2);
         Teacher jones = Teacher.addTeacher("Jones", Person.Gender.Female, 102,1.2);
         
-        Course geom =  Course.addCourse("Geometry", Course.Type.Math, 1);
-        Course photo =  Course.addCourse("Photography", Course.Type.Elective, 3);       
-        Course biology =  Course.addCourse("Biology", Course.Type.Science, 2);       
-        Course worldHistory =  Course.addCourse("WorldHistory", Course.Type.History, 2);   
+        Course geom =  Course.addCourse("Geometry", Course.Type.Math, 1,true);
+        Course photo =  Course.addCourse("Photography", Course.Type.Elective, 3,true);       
+        Course biology =  Course.addCourse("Biology", Course.Type.Science, 2,false);       
+        Course worldHistory =  Course.addCourse("WorldHistory", Course.Type.History, 2,false);   
         geom.addStudent(ann,3);
 
         geom.addStudent(bobby,3.0);
@@ -50,6 +50,13 @@ public class School {
         
         Teacher mostElectives= Teacher.getMostElectives();
         System.out.println("Most electives-"+mostElectives.getName());
-        anderson.printStudentsNamesInGrade(11);
+        anderson.printStudentsNamesInGrade(9);
+        
+        Student.printNamesInHonors();
+        
+        Teacher lessMean =joe.leastMean();
+        System.out.println("least mean teacher is-"+lessMean.getName());
+        
+        Teacher.printTeachersNamesThatTeach(9);
     }
 }
